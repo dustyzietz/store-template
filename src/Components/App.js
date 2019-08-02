@@ -32,7 +32,8 @@ export class App extends Component {
             <Fragment>
                 <Header />
                   
-                  <Exercises 
+                  <Exercises
+                  category={} 
                   exercises={exercises}
                   />
 
