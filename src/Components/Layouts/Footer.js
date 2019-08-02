@@ -27,7 +27,9 @@ export default ({ muscles, onSelect, category }) => {
         >
            <Tab label='all' />
           {muscles.map(group =>
-            <Tab label={group} /> )}
+            <Tab 
+            key={group}
+            label={group} /> )}
          
         </Tabs>
       </Paper>

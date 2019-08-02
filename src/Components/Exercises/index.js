@@ -15,12 +15,18 @@ paper: {
 }
 }
 
-export default ({ exercises }) => 
+export default ({ exercises, category, onSelect, 
+exercise: {
+    id, 
+    title= 'Welcome!', 
+    description= 'Please select an exercise from the list on the left.'
+    } }) => 
 <Grid container>
     <Grid item xs>
     <Paper elevation={5} style={styles.paper} >
     {exercises.map(([group, exercises]) =>
-    <Fragment>
+    !category || category === group
+    ?<Fragment key={group}>
         <Typography
         variant='h6'
         style={{textTransform: 'capitalize'}}
@@ -28,13 +34,20 @@ export default ({ exercises }) =>
             {group}
         </Typography>
         <List component='ul'>
-            {exercises.map(({ title }) =>
-            <ListItem>
-                <ListItemText primary={title} />
+            {exercises.map(({ id, title }) =>
+            <ListItem 
+            key={id}
+            button
+            onClick={() => onSelect(id)}
+            >
+                <ListItemText 
+                primary={title}
+                />
             </ListItem>
             )}
         </List>
         </Fragment>
+        : null 
         )}
     </Paper>
     </Grid>
@@ -42,13 +55,12 @@ export default ({ exercises }) =>
     <Paper elevation={5} style={styles.paper} >
     <Typography
     variant='h5'>
-        Welcome!
+       {title}
         </Typography>
     <Typography
     variant='subtitle1'
     style={{ marginTop: 20 }}>
-        Please select an exercise from the list on the left.
-        
+       {description}
     </Typography>
     </Paper>
     </Grid>
