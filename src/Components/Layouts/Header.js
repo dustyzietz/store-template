@@ -1,7 +1,7 @@
 import React from 'react';
 import { Toolbar, Typography, AppBar } from '@material-ui/core';
 
-import CreateDialog from '../Exercises/Dialogs/Create'
+import CreateDialog from '../Exercises/Dialog'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   }));
 
    
-export default function Header() { 
+export default ({ muscles, onExerciseCreate }) => { 
   const classes = useStyles();
     return (
         <AppBar position="static">
@@ -22,7 +22,10 @@ export default function Header() {
           <Typography variant='h6' color='inherit' className={classes.title} >
             Exercise Database
           </Typography>
-          <CreateDialog/>
+          <CreateDialog
+          onCreate={onExerciseCreate} 
+          muscles={muscles}
+          />
         </Toolbar>
       </AppBar>
     )

@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import { Grid, Paper, Typography, List, ListItem, ListItemText } from '@material-ui/core';
-
-
-
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Edit from '@material-ui/icons/Edit';
+import Form from './Form';
 
 
 const styles = {
@@ -20,7 +22,11 @@ exercise: {
     id, 
     title= 'Welcome!', 
     description= 'Please select an exercise from the list on the left.'
-    } }) => 
+    },
+    onDelete,
+    onEditSelect,
+    editMode
+     }) => 
 <Grid container>
     <Grid item xs>
     <Paper elevation={5} style={styles.paper} >
@@ -43,6 +49,16 @@ exercise: {
                 <ListItemText 
                 primary={title}
                 />
+                <ListItemSecondaryAction>
+                    <IconButton onClick={() => onEditSelect(id)} aria-label="delete">
+                <Edit />
+              </IconButton>
+                <IconButton onClick={() => onDelete(id)} aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
+              
+                </ListItemSecondaryAction>
+                
             </ListItem>
             )}
         </List>
@@ -53,7 +69,10 @@ exercise: {
     </Grid>
     <Grid item xs>
     <Paper elevation={5} style={styles.paper} >
-    <Typography
+        {editMode
+        ? <Form/>
+    : <Fragment>
+        <Typography
     variant='h5'>
        {title}
         </Typography>
@@ -62,6 +81,7 @@ exercise: {
     style={{ marginTop: 20 }}>
        {description}
     </Typography>
+    </Fragment>}
     </Paper>
     </Grid>
 </Grid>
